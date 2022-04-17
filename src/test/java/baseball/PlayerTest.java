@@ -26,6 +26,11 @@ public class PlayerTest extends NsTest {
                         run("122");
                         Player player = new Player();
                     }).isInstanceOf(IllegalArgumentException.class);
+
+                    assertThatThrownBy(() -> {
+                        run("1!2");
+                        Player player = new Player();
+                    }).isInstanceOf(IllegalArgumentException.class);
                 }
         );
     }

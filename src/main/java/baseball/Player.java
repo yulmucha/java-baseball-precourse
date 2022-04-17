@@ -79,6 +79,10 @@ public class Player implements GamePlayer {
 
     private Boolean isInRange(String[] numsStr) {
         for (String numStr : numsStr) {
+            if (!Character.isDigit(numStr.charAt(0))) {
+                return false;
+            }
+
             int num = Integer.parseInt(numStr);
             if (num < 1 || num > 9) {
                 return false;
