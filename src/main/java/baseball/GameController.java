@@ -16,6 +16,7 @@ public class GameController {
     public void run() {
         while (true) {
             compareNums();
+            printResult();
 
             if (!isEnd()) {
                 player.generateNums();
@@ -58,23 +59,48 @@ public class GameController {
     }
 
     private void compareNums() {
-        strikeCount = 0;
-        ballCount = 0;
+        ballCount = getBallCount(computer.getNums(), player.getNums());
+        strikeCount = getStrikeCount(computer.getNums(), player.getNums());
+    }
 
+    public static int getStrikeCount(int[] computerNums, int[] playerNums) {
+        int strikeCount = 0;
         for (int i = 0; i < Constants.NUMS_SIZE; i++) {
-            for (int j = 0; j < Constants.NUMS_SIZE; j++) {
-                if (computer.getNums()[i] == player.getNums()[j]) {
-                    if (i == j) {
-                        strikeCount++;
-                        break;
-                    }
-
-                    ballCount++;
-                    break;
-                }
+            if (computerNums[i] == playerNums[i]) {
+                strikeCount++;
             }
         }
-        printResult();
+
+        return strikeCount;
+    }
+
+    public static int getBallCount(int[] computerNums, int[] playerNums) {
+        int count = 0;
+        for (int i = 0; i < playerNums.length; i++) {
+            count += getSingleBallCount(computerNums, i, playerNums[i]);
+        }
+        return count;
+    }
+
+    public static int getSingleBallCount(int[] computerNums, int index, int playerNum) {
+        int count = 0;
+        for (int j = 0; j < index; j++) {
+            count = incrementCount(computerNums[j], playerNum, count);
+        }
+
+        for (int j = index + 1; j < computerNums.length; j++) {
+            count = incrementCount(computerNums[j], playerNum, count);
+        }
+
+        return count;
+    }
+
+    public static int incrementCount(int a, int b, int count) {
+        if (a == b) {
+            count++;
+        }
+
+        return count;
     }
 
     private Boolean isEnd() {
