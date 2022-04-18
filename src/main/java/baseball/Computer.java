@@ -11,10 +11,6 @@ public class Computer implements GamePlayer {
         return nums;
     }
 
-    public Computer() {
-        generateNums();
-    }
-
     @Override
     public void generateNums() {
         clearNums();

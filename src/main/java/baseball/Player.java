@@ -11,10 +11,6 @@ public class Player implements GamePlayer {
         return nums;
     }
 
-    public Player() {
-        generateNums();
-    }
-
     @Override
     public void generateNums() {
         String[] split = getInput().split("");

@@ -16,29 +16,36 @@ public class GameController {
     }
 
     public void run() {
-        while (true) {
-            compareNums();
-            printResult();
-
-            if (!isEnd()) {
-                player.generateNums();
-                continue;
-            }
-            System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임종료");
-
-            String input = getRestartOrEndInput();
-
-            if (input.equals("1")) {
-                computer.generateNums();
-                player.generateNums();
-                continue;
-            }
-
-            if (input.equals("2")) {
-                System.out.println("게임 종료");
-                break;
-            }
+        String restartInput = play();
+        while (restartInput.equals("1")) {
+            restartInput = play();
         }
+
+        System.out.println("게임 종료");
+    }
+
+    private String play() {
+        computer.generateNums();
+        String result = guessNumbers();
+        while (result.isEmpty()) {
+            result = guessNumbers();
+        }
+
+        return result;
+    }
+
+    public String guessNumbers() {
+        player.generateNums();
+        ballCount = referee.getBallCount(computer.getNums(), player.getNums());
+        strikeCount = referee.getStrikeCount(computer.getNums(), player.getNums());
+        printResult();
+
+        if (strikeCount == 3) {
+            System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임종료");
+            return getRestartOrEndInput();
+        }
+
+        return "";
     }
 
     private String getRestartOrEndInput() {
@@ -60,19 +67,6 @@ public class GameController {
         return true;
     }
 
-    private void compareNums() {
-        ballCount = referee.getBallCount(computer.getNums(), player.getNums());
-        strikeCount = referee.getStrikeCount(computer.getNums(), player.getNums());
-    }
-
-    private Boolean isEnd() {
-        if (strikeCount == 3) {
-            return true;
-        }
-
-        return false;
-    }
-
     private void printResult() {
         if (ballCount == 0 && strikeCount == 0) {
             System.out.println("낫싱");
@@ -90,6 +84,5 @@ public class GameController {
         }
 
         System.out.println(ballCount + "볼 " + strikeCount + "스트라이크");
-        return;
     }
 }

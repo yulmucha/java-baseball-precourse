@@ -14,22 +14,18 @@ public class PlayerTest extends NsTest {
                 () -> {
                     assertThatThrownBy(() -> {
                         run("109");
-                        Player player = new Player();
                     }).isInstanceOf(IllegalArgumentException.class);
 
                     assertThatThrownBy(() -> {
                         run("1234");
-                        Player player = new Player();
                     }).isInstanceOf(IllegalArgumentException.class);
 
                     assertThatThrownBy(() -> {
                         run("122");
-                        Player player = new Player();
                     }).isInstanceOf(IllegalArgumentException.class);
 
                     assertThatThrownBy(() -> {
                         run("1!2");
-                        Player player = new Player();
                     }).isInstanceOf(IllegalArgumentException.class);
                 }
         );
