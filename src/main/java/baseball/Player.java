@@ -53,21 +53,9 @@ public class Player implements GamePlayer {
     }
 
     private Boolean isDuplicated(String[] numsStr) {
-        for (String numStr : numsStr) {
-            if (isDuplicated(numStr, numsStr)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    private Boolean isDuplicated(String numStr, String[] numsStr) {
         int count = 0;
-        for (String n : numsStr) {
-            if (numStr.equals(n)) {
-                count++;
-            }
+        for (String numStr : numsStr) {
+            count = getCount(numStr, numsStr);
         }
 
         if (count > 1) {
@@ -75,6 +63,23 @@ public class Player implements GamePlayer {
         }
 
         return false;
+    }
+
+    private int getCount(String numStr, String[] split) {
+        int count = 0;
+        for (String n : split) {
+            count += isSame(n, numStr);
+        }
+
+        return count;
+    }
+
+    private int isSame(String a, String b) {
+        if (a.equals(b)) {
+            return 1;
+        }
+
+        return 0;
     }
 
     private Boolean isInRange(String[] numsStr) {
