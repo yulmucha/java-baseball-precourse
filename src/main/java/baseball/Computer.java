@@ -29,7 +29,7 @@ public class Computer implements GamePlayer {
         return num;
     }
 
-    private Boolean isDuplicated(int num, int index) {
+    private boolean isDuplicated(int num, int index) {
         int count = 0;
         for (int i = 0; i < index; i++) {
             count += isSame(nums[i], num);

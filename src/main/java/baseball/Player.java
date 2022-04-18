@@ -30,7 +30,7 @@ public class Player implements GamePlayer {
         return input;
     }
 
-    private Boolean isValidInput(String input) {
+    private boolean isValidInput(String input) {
         if (input.length() != Constants.NUMS_SIZE) {
             return false;
         }
@@ -48,7 +48,7 @@ public class Player implements GamePlayer {
         return true;
     }
 
-    private Boolean isDuplicated(String[] numsStr) {
+    private boolean isDuplicated(String[] numsStr) {
         int count = 0;
         for (String numStr : numsStr) {
             count = getCount(numStr, numsStr);
@@ -78,7 +78,7 @@ public class Player implements GamePlayer {
         return 0;
     }
 
-    private Boolean isInRange(String[] numsStr) {
+    private boolean isInRange(String[] numsStr) {
         for (String numStr : numsStr) {
             if (!Character.isDigit(numStr.charAt(0))) {
                 return false;

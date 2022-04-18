@@ -59,7 +59,7 @@ public class GameController {
         return input;
     }
 
-    private Boolean isValidRestartOrEndInput(String input) {
+    private boolean isValidRestartOrEndInput(String input) {
         if (input.length() > 1 || !(input.equals("1") || input.equals("2"))) {
             return false;
         }
