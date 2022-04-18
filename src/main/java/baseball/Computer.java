@@ -16,27 +16,38 @@ public class Computer implements GamePlayer {
         clearNums();
 
         for (int i = 0; i < Constants.NUMS_SIZE; i++) {
-            nums[i] = pickNumber();
+            nums[i] = pickNumber(i);
         }
     }
 
-    private int pickNumber() {
+    private int pickNumber(int i) {
         int num = Randoms.pickNumberInRange(Constants.NUMS_MIN, Constants.NUMS_MAX);
-        while (isDuplicated(num)) {
+        while (isDuplicated(num, i)) {
             num = Randoms.pickNumberInRange(Constants.NUMS_MIN, Constants.NUMS_MAX);
         }
 
         return num;
     }
 
-    private Boolean isDuplicated(int num) {
-        for (int n : nums) {
-            if (n == num) {
-                return true;
-            }
+    private Boolean isDuplicated(int num, int index) {
+        int count = 0;
+        for (int i = 0; i < index; i++) {
+            count += isSame(nums[i], num);
         }
 
-        return false;
+        if (count == 0) {
+            return false;
+        }
+
+        return true;
+    }
+
+    private int isSame(int a, int b) {
+        if (a == b) {
+            return 1;
+        }
+
+        return 0;
     }
 
     private void clearNums() {
