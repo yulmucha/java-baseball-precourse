@@ -3,7 +3,9 @@ package baseball;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class GameControllerTest {
+public class RefereeTest {
+
+    Referee referee = new Referee();
 
     @Test
     void 스트라이크_테스트() {
@@ -14,13 +16,13 @@ public class GameControllerTest {
                 {1, 4, 5}
         };
 
-        int strikeCount = GameController.getStrikeCount(computerNums, playerNumsSet[0]);
+        int strikeCount = referee.getStrikeCount(computerNums, playerNumsSet[0]);
         Assertions.assertThat(strikeCount).isEqualTo(1);
 
-        strikeCount = GameController.getStrikeCount(computerNums, playerNumsSet[1]);
+        strikeCount = referee.getStrikeCount(computerNums, playerNumsSet[1]);
         Assertions.assertThat(strikeCount).isEqualTo(2);
 
-        strikeCount = GameController.getStrikeCount(computerNums, playerNumsSet[2]);
+        strikeCount = referee.getStrikeCount(computerNums, playerNumsSet[2]);
         Assertions.assertThat(strikeCount).isEqualTo(3);
     }
 
@@ -30,15 +32,15 @@ public class GameControllerTest {
         int[] playerNums = {3, 4, 1};
 
         int index = 0;
-        int singleBallCount = GameController.getSingleBallCount(computerNums, index, playerNums[index]);
+        int singleBallCount = referee.getSingleBallCount(computerNums, index, playerNums[index]);
         Assertions.assertThat(singleBallCount).isEqualTo(0);
 
         index = 1;
-        singleBallCount = GameController.getSingleBallCount(computerNums, index, playerNums[index]);
+        singleBallCount = referee.getSingleBallCount(computerNums, index, playerNums[index]);
         Assertions.assertThat(singleBallCount).isEqualTo(0);
 
         index = 2;
-        singleBallCount = GameController.getSingleBallCount(computerNums, index, playerNums[index]);
+        singleBallCount = referee.getSingleBallCount(computerNums, index, playerNums[index]);
         Assertions.assertThat(singleBallCount).isEqualTo(1);
     }
 
@@ -52,16 +54,16 @@ public class GameControllerTest {
                 {1, 4, 5},
         };
 
-        int ballCount = GameController.getBallCount(computerNums, playerNumsSet[0]);
+        int ballCount = referee.getBallCount(computerNums, playerNumsSet[0]);
         Assertions.assertThat(ballCount).isEqualTo(1);
 
-        ballCount = GameController.getBallCount(computerNums, playerNumsSet[1]);
+        ballCount = referee.getBallCount(computerNums, playerNumsSet[1]);
         Assertions.assertThat(ballCount).isEqualTo(2);
 
-        ballCount = GameController.getBallCount(computerNums, playerNumsSet[2]);
+        ballCount = referee.getBallCount(computerNums, playerNumsSet[2]);
         Assertions.assertThat(ballCount).isEqualTo(0);
 
-        ballCount = GameController.getBallCount(computerNums, playerNumsSet[3]);
+        ballCount = referee.getBallCount(computerNums, playerNumsSet[3]);
         Assertions.assertThat(ballCount).isEqualTo(0);
     }
 }

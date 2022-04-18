@@ -7,10 +7,12 @@ public class GameController {
     private int strikeCount = 0;
     private final GamePlayer computer;
     private final GamePlayer player;
+    private final Referee referee;
 
-    public GameController(Computer computer, GamePlayer player) {
+    public GameController(Computer computer, GamePlayer player, Referee referee) {
         this.computer = computer;
         this.player = player;
+        this.referee = referee;
     }
 
     public void run() {
@@ -59,46 +61,8 @@ public class GameController {
     }
 
     private void compareNums() {
-        ballCount = getBallCount(computer.getNums(), player.getNums());
-        strikeCount = getStrikeCount(computer.getNums(), player.getNums());
-    }
-
-    public static int getStrikeCount(int[] computerNums, int[] playerNums) {
-        int count = 0;
-        for (int i = 0; i < Constants.NUMS_SIZE; i++) {
-            count += isSame(computerNums[i], playerNums[i]);
-        }
-
-        return count;
-    }
-
-    public static int getBallCount(int[] computerNums, int[] playerNums) {
-        int count = 0;
-        for (int i = 0; i < playerNums.length; i++) {
-            count += getSingleBallCount(computerNums, i, playerNums[i]);
-        }
-
-        return count;
-    }
-
-    public static int getSingleBallCount(int[] computerNums, int index, int playerNum) {
-        int count = 0;
-        for (int j = 0; j < index; j++) {
-            count += isSame(computerNums[j], playerNum);
-        }
-        for (int j = index + 1; j < computerNums.length; j++) {
-            count += isSame(computerNums[j], playerNum);
-        }
-
-        return count;
-    }
-
-    public static int isSame(int a, int b) {
-        if (a == b) {
-            return 1;
-        }
-
-        return 0;
+        ballCount = referee.getBallCount(computer.getNums(), player.getNums());
+        strikeCount = referee.getStrikeCount(computer.getNums(), player.getNums());
     }
 
     private Boolean isEnd() {
