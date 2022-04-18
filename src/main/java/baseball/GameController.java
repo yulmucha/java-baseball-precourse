@@ -64,14 +64,12 @@ public class GameController {
     }
 
     public static int getStrikeCount(int[] computerNums, int[] playerNums) {
-        int strikeCount = 0;
+        int count = 0;
         for (int i = 0; i < Constants.NUMS_SIZE; i++) {
-            if (computerNums[i] == playerNums[i]) {
-                strikeCount++;
-            }
+            count += isSame(computerNums[i], playerNums[i]);
         }
 
-        return strikeCount;
+        return count;
     }
 
     public static int getBallCount(int[] computerNums, int[] playerNums) {
@@ -79,28 +77,28 @@ public class GameController {
         for (int i = 0; i < playerNums.length; i++) {
             count += getSingleBallCount(computerNums, i, playerNums[i]);
         }
+
         return count;
     }
 
     public static int getSingleBallCount(int[] computerNums, int index, int playerNum) {
         int count = 0;
         for (int j = 0; j < index; j++) {
-            count = incrementCount(computerNums[j], playerNum, count);
+            count += isSame(computerNums[j], playerNum);
         }
-
         for (int j = index + 1; j < computerNums.length; j++) {
-            count = incrementCount(computerNums[j], playerNum, count);
+            count += isSame(computerNums[j], playerNum);
         }
 
         return count;
     }
 
-    public static int incrementCount(int a, int b, int count) {
+    public static int isSame(int a, int b) {
         if (a == b) {
-            count++;
+            return 1;
         }
 
-        return count;
+        return 0;
     }
 
     private Boolean isEnd() {
